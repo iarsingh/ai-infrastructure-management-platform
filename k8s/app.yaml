@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-infrastructure-management-platform
+  labels:
+    app: ai-infrastructure-management-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-infrastructure-management-platform
+  template:
+    metadata:
+      labels:
+        app: ai-infrastructure-management-platform
+    spec:
+      containers:
+        - name: api
+          image: ai-infrastructure-management-platform:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-infrastructure-management-platform
+spec:
+  selector:
+    app: ai-infrastructure-management-platform
+  ports:
+    - port: 80
+      targetPort: 8080
