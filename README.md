@@ -1,5 +1,12 @@
 # AI Infrastructure Management Platform
 
+## Overview
+
+A drift check for infrastructure management. The `POST /check` endpoint compares desired state with live state and passes only when they are equal; apply is always false, so drift is reported but never corrected automatically. A versioned `/v1` ops API adds workspaces, tenant isolation, job approval and audit records.
+
+- **Built with:** Python, pytest, Docker, GitHub Actions
+- **Scope:** Local laptop proof with tests; it does not call a hosted model and refuses production apply.
+
 <!-- project-guide:start -->
 ## Project guide
 
